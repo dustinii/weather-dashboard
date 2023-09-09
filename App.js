@@ -80,8 +80,8 @@ function displaySearchHistory() {
         const historyButton = document.createElement('button');
         historyButton.setAttribute('type', 'button');
         historyButton.setAttribute('aria-controls', 'today forecast');
-        historyButton.classList.add('button', 'is-light', 'mb-2', 'btn-history');
-        historyButton.setAttribute('data-search', searchHistoryList[i]);
+        historyButton.classList.add('button', 'is-light', 'mb-2', 'hisBUTT');
+        historyButton.setAttribute('wya', searchHistoryList[i]);
         historyButton.textContent = searchHistoryList[i];
         searchHistoryEl.append(historyButton);
     }
