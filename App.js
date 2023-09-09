@@ -1,6 +1,6 @@
 // Constants for the app
 const WEATHER_API_ROOT_URL = 'https://api.openweathermap.org';
-const WEATHER_API_KEY = '';
+const WEATHER_API_KEY = 'e9c674006ee239e863f114ca3b7c9241';
 
 const HISTORY_KEY = 'search-history';
 let searchHistoryList = [];
@@ -104,32 +104,32 @@ function displayCurrentWeather(city, weatherData) {
 
     const cityEl = document.createElement('h2');
     cityEl.textContent = `${city} (${date})`;
-    currentWeatherContainerEl.appendChild(cityEl);
+    currentWeatherEl.appendChild(cityEl);
 
     const iconEl = document.createElement('img');
     iconEl.setAttribute('src', iconUrl);
     iconEl.setAttribute('alt', description);
-    currentWeatherContainerEl.appendChild(iconEl);
+    currentWeatherEl.appendChild(iconEl);
 
     const tempEl = document.createElement('p');
     tempEl.textContent = `Temp: ${temp}°F`;
-    currentWeatherContainerEl.appendChild(tempEl);
+    currentWeatherEl.appendChild(tempEl);
 
     const humidityEl = document.createElement('p');
     humidityEl.textContent = `Humidity: ${humidity}%`;
-    currentWeatherContainerEl.appendChild(humidityEl);
+    currentWeatherEl.appendChild(humidityEl);
 
     const windSpeedEl = document.createElement('p');
     windSpeedEl.textContent = `Wind Speed: ${windSpeed} MPH`;
-    currentWeatherContainerEl.appendChild(windSpeedEl);
+    currentWeatherEl.appendChild(windSpeedEl);
 
     const descriptionEl = document.createElement('p');
     descriptionEl.textContent = `Description: ${description}`;
-    currentWeatherContainerEl.appendChild(descriptionEl);
+    currentWeatherEl.appendChild(descriptionEl);
 };
 
 function displayForecast(dailyForecast) {
-    forecastContainerEl.innerHTML = '';
+    forecastEl.innerHTML = '';
 
     for (let i = 1; i < dailyForecast.length; i += 8) {
         const dailyData = dailyForecast[i];
@@ -160,7 +160,7 @@ function displayForecast(dailyForecast) {
         humidityEl.textContent = `Humidity: ${humidity}%`;
         forecastCardEl.appendChild(humidityEl);
 
-        forecastContainerEl.appendChild(forecastCardEl);
+        forecastEl.appendChild(forecastCardEl);
     }
 };
 
