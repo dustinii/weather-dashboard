@@ -25,7 +25,7 @@ function fetchWeatherData(coords) {
         .catch(err => console.error(err));
 }
 
-function fetchCityCoords(city) { 
+function fetchCityCoords(city) {
     const apiUrl = `${WEATHER_API_ROOT_URL}/geo/1.0/direct?q=${city}&limit=5&appid=${WEATHER_API_KEY}`;
 
     fetch(apiUrl)
@@ -48,24 +48,53 @@ function onSearchFormSubmit(event) {
 
     fetchCityCoords(cityName);
     searchInputEl.value = '';
-    
+
 };
 
 function onSearchHistoryClick(event) {
-    
+    if (!event.target.matches('.btn-history')) return;
+
+    const cityName = event.target.getAttribute('data-search');
+    fetchCityCoords(cityName);
 };
 
-function loadSearchHistory(){};
+function loadSearchHistory() {
+    const storedHistory = localStorage.getItem(HISTORY_KEY);
+    if (storedHistory) {
+        searchHistoryList = JSON.parse(storedHistory);
+        displaySearchHistory();
+    }
+};
 
-function updateSearchHistory(city){};
+function updateSearchHistory(city) {
+    if (!searchHistoryList.includes(city)) {
+        searchHistoryList.push(city);
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(searchHistoryList));
+        displaySearchHistory();
+    }
+};
 
-function displaySearchHistory(){};
+function displaySearchHistory() {
+    searchHistoryEl.innerHTML = '';
+    for (let i = searchHistoryList.length - 1; i >= 0; i--) {
+        const historyButton = document.createElement('button');
+        historyButton.setAttribute('type', 'button');
+        historyButton.setAttribute('aria-controls', 'today forecast');
+        historyButton.classList.add('history-btn', 'btn-history');
+        historyButton.setAttribute('data-search', searchHistoryList[i]);
+        historyButton.textContent = searchHistoryList[i];
+        searchHistoryEl.append(historyButton);
+    }
+};
 
-function displayWeatherData(city, data){};
+function displayWeatherData(city, data) {
+    displayCurrentWeather(city, data.list[0]);
+    displayForecast(data.list);
+ };
 
-function displayCurrentWeather(city, weatherData){};
+function displayCurrentWeather(city, weatherData) { };
 
-function displayForecast(dailyForecast){};
+function displayForecast(dailyForecast) { };
 
 loadSearchHistory();
 searchFormEl.addEventListener('submit', onSearchFormSubmit);
