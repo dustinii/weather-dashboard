@@ -96,7 +96,8 @@ function displayCurrentWeather(city, weatherData) {
     currentWeatherEl.innerHTML = '';
 
     const date = dayjs.unix(weatherData.dt).tz(weatherData.timezone).format('M/D/YYYY');
-    const iconUrl = `${WEATHER_API_ROOT_URL}/img/wn/${weatherData.weather[0].icon}.png`;
+    const iconUrl = `${WEATHER_API_ROOT_URL}/img/w/${weatherData.weather[0].icon}.png`;
+    console.log(iconUrl)
     const description = weatherData.weather[0].description;
     const temp = weatherData.main.temp;
     const humidity = weatherData.main.humidity;
