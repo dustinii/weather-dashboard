@@ -16,9 +16,9 @@ const searchHistoryEl = document.querySelector('#history');
 dayjs.extend(dayjs_plugin_utc);
 dayjs.extend(dayjs_plugin_timezone);
 
-function fetchWeatherData(){};
+function fetchWeatherData(coords){};
 
-function fetchCityCoords(){};
+function fetchCityCoords(city){};
 
 function onSearchFormSubmit(event){};
 
@@ -26,15 +26,15 @@ function onSearchHistoryClick(event){};
 
 function loadSearchHistory(){};
 
-function updateSearchHistory(){};
+function updateSearchHistory(city){};
 
 function displaySearchHistory(){};
 
-function displayWeatherData(){};
+function displayWeatherData(city, data){};
 
-function displayCurrentWeather(){};
+function displayCurrentWeather(city, weatherData){};
 
-function displayForecast(){};
+function displayForecast(dailyForecast){};
 
 loadSearchHistory();
 searchFormEl.addEventListener('submit', onSearchFormSubmit);
