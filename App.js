@@ -92,7 +92,7 @@ function displayWeatherData(city, data) {
     displayForecast(data.list);
 };
 
-function displayCurrentWeather(city, weatherData) { 
+function displayCurrentWeather(city, weatherData) {
     currentWeatherEl.innerHTML = '';
 
     const date = dayjs.unix(weatherData.dt).tz(weatherData.timezone).format('M/D/YYYY');
@@ -128,7 +128,41 @@ function displayCurrentWeather(city, weatherData) {
     currentWeatherContainerEl.appendChild(descriptionEl);
 };
 
-function displayForecast(dailyForecast) { };
+function displayForecast(dailyForecast) {
+    forecastContainerEl.innerHTML = '';
+
+    for (let i = 1; i < dailyForecast.length; i += 8) {
+        const dailyData = dailyForecast[i];
+
+        const date = dayjs.unix(dailyData.dt).tz(dailyData.timezone).format('M/D/YYYY');
+        const iconUrl = `https://openweathermap.org/img/w/${dailyData.weather[0].icon}.png`;
+        const description = dailyData.weather[0].description;
+        const temp = dailyData.main.temp;
+        const humidity = dailyData.main.humidity;
+
+        const forecastCardEl = document.createElement('div');
+        forecastCardEl.classList.add('forecast-card');
+
+        const dateEl = document.createElement('h4');
+        dateEl.textContent = date;
+        forecastCardEl.appendChild(dateEl);
+
+        const iconEl = document.createElement('img');
+        iconEl.setAttribute('src', iconUrl);
+        iconEl.setAttribute('alt', description);
+        forecastCardEl.appendChild(iconEl);
+
+        const tempEl = document.createElement('p');
+        tempEl.textContent = `Temp: ${temp}°F`;
+        forecastCardEl.appendChild(tempEl);
+
+        const humidityEl = document.createElement('p');
+        humidityEl.textContent = `Humidity: ${humidity}%`;
+        forecastCardEl.appendChild(humidityEl);
+
+        forecastContainerEl.appendChild(forecastCardEl);
+    }
+};
 
 loadSearchHistory();
 searchFormEl.addEventListener('submit', onSearchFormSubmit);
