@@ -90,9 +90,43 @@ function displaySearchHistory() {
 function displayWeatherData(city, data) {
     displayCurrentWeather(city, data.list[0]);
     displayForecast(data.list);
- };
+};
 
-function displayCurrentWeather(city, weatherData) { };
+function displayCurrentWeather(city, weatherData) { 
+    currentWeatherEl.innerHTML = '';
+
+    const date = dayjs.unix(weatherData.dt).tz(weatherData.timezone).format('M/D/YYYY');
+    const iconUrl = `${WEATHER_API_ROOT_URL}/img/wn/${weatherData.weather[0].icon}.png`;
+    const description = weatherData.weather[0].description;
+    const temp = weatherData.main.temp;
+    const humidity = weatherData.main.humidity;
+    const windSpeed = weatherData.wind.speed;
+
+    const cityEl = document.createElement('h2');
+    cityEl.textContent = `${city} (${date})`;
+    currentWeatherContainerEl.appendChild(cityEl);
+
+    const iconEl = document.createElement('img');
+    iconEl.setAttribute('src', iconUrl);
+    iconEl.setAttribute('alt', description);
+    currentWeatherContainerEl.appendChild(iconEl);
+
+    const tempEl = document.createElement('p');
+    tempEl.textContent = `Temp: ${temp}°F`;
+    currentWeatherContainerEl.appendChild(tempEl);
+
+    const humidityEl = document.createElement('p');
+    humidityEl.textContent = `Humidity: ${humidity}%`;
+    currentWeatherContainerEl.appendChild(humidityEl);
+
+    const windSpeedEl = document.createElement('p');
+    windSpeedEl.textContent = `Wind Speed: ${windSpeed} MPH`;
+    currentWeatherContainerEl.appendChild(windSpeedEl);
+
+    const descriptionEl = document.createElement('p');
+    descriptionEl.textContent = `Description: ${description}`;
+    currentWeatherContainerEl.appendChild(descriptionEl);
+};
 
 function displayForecast(dailyForecast) { };
 
