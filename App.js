@@ -108,6 +108,10 @@ function displayCurrentWeather(city, weatherData) {
     const humidity = weatherData.main.humidity;
     const windSpeed = weatherData.wind.speed;
 
+    const titleEl = document.createElement('h1');
+    titleEl.textContent = `Current Weather:`;
+    currentWeatherEl.appendChild(titleEl);
+
     const cityEl = document.createElement('h2');
     cityEl.textContent = `${city} (${date})`;
     weatherBox.appendChild(cityEl);
@@ -140,6 +144,10 @@ function displayCurrentWeather(city, weatherData) {
 function displayForecast(dailyForecast) {
     forecastEl.innerHTML = '';
 
+    const forecastTitle = document.createElement('h2');
+    forecastTitle.textContent = '5-Day Forecast:';
+    forecastEl.appendChild(forecastTitle);
+    
     for (let i = 1; i < dailyForecast.length; i += 8) {
         const dailyData = dailyForecast[i];
 
