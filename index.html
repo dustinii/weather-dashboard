@@ -4,18 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brighter Days</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/style.css" />
 </head>
 <body>
-    <h1>Rain or Shine</h1>
-    <h2>The Next Weeks Weather We Shall Find!</h2>
-    <form id="search-form">
-        <input type="text" id="search-input" placeholder="Enter city" />
-        <button type="submit">Search</button>
-    </form>
-    <div id="history"></div>
-    <section id="today"></section>
-    <section id="forecast"></section>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Rain or Shine</h1>
+            <h2 class="subtitle">The Next Week's Weather We Shall Find!</h2>
+            <form id="search-form" class="field has-addons">
+                <div class="control is-expanded">
+                    <input class="input" type="text" id="search-input" placeholder="Enter city">
+                </div>
+                <div class="control">
+                    <button type="submit" class="button is-info">Search</button>
+                </div>
+            </form>
+            <div id="history" class="mt-5"></div>
+            <section id="today" class="box mt-5"></section>
+            <section id="forecast" class="mt-5"></section>
+        </div>
+    </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/plugin/timezone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/plugin/utc.min.js"></script>

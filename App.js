@@ -52,9 +52,9 @@ function onSearchFormSubmit(event) {
 };
 
 function onSearchHistoryClick(event) {
-    if (!event.target.matches('.btn-history')) return;
+    if (!event.target.matches('.hisBUTT')) return;
 
-    const cityName = event.target.getAttribute('data-search');
+    const cityName = event.target.getAttribute('wya');
     fetchCityCoords(cityName);
 };
 
@@ -80,7 +80,7 @@ function displaySearchHistory() {
         const historyButton = document.createElement('button');
         historyButton.setAttribute('type', 'button');
         historyButton.setAttribute('aria-controls', 'today forecast');
-        historyButton.classList.add('history-btn', 'btn-history');
+        historyButton.classList.add('button', 'is-light', 'mb-2', 'btn-history');
         historyButton.setAttribute('data-search', searchHistoryList[i]);
         historyButton.textContent = searchHistoryList[i];
         searchHistoryEl.append(historyButton);
@@ -95,9 +95,11 @@ function displayWeatherData(city, data) {
 function displayCurrentWeather(city, weatherData) {
     currentWeatherEl.innerHTML = '';
 
+    const weatherBox = document.createElement('div');
+    weatherBox.classList.add('box');
+
     const date = dayjs.unix(weatherData.dt).tz(weatherData.timezone).format('M/D/YYYY');
     const iconUrl = `${WEATHER_API_ROOT_URL}/img/w/${weatherData.weather[0].icon}.png`;
-    console.log(iconUrl)
     const description = weatherData.weather[0].description;
     const temp = weatherData.main.temp;
     const humidity = weatherData.main.humidity;
@@ -105,29 +107,32 @@ function displayCurrentWeather(city, weatherData) {
 
     const cityEl = document.createElement('h2');
     cityEl.textContent = `${city} (${date})`;
-    currentWeatherEl.appendChild(cityEl);
+    weatherBox.appendChild(cityEl);
 
     const iconEl = document.createElement('img');
     iconEl.setAttribute('src', iconUrl);
     iconEl.setAttribute('alt', description);
-    currentWeatherEl.appendChild(iconEl);
+    weatherBox.appendChild(iconEl);
 
     const tempEl = document.createElement('p');
     tempEl.textContent = `Temp: ${temp}°F`;
-    currentWeatherEl.appendChild(tempEl);
+    weatherBox.appendChild(tempEl);
 
     const humidityEl = document.createElement('p');
     humidityEl.textContent = `Humidity: ${humidity}%`;
-    currentWeatherEl.appendChild(humidityEl);
+    weatherBox.appendChild(humidityEl);
 
     const windSpeedEl = document.createElement('p');
     windSpeedEl.textContent = `Wind Speed: ${windSpeed} MPH`;
-    currentWeatherEl.appendChild(windSpeedEl);
+    weatherBox.appendChild(windSpeedEl);
 
     const descriptionEl = document.createElement('p');
     descriptionEl.textContent = `Description: ${description}`;
-    currentWeatherEl.appendChild(descriptionEl);
+    weatherBox.appendChild(descriptionEl);
+
+    currentWeatherEl.appendChild(weatherBox);
 };
+
 
 function displayForecast(dailyForecast) {
     forecastEl.innerHTML = '';
@@ -142,7 +147,7 @@ function displayForecast(dailyForecast) {
         const humidity = dailyData.main.humidity;
 
         const forecastCardEl = document.createElement('div');
-        forecastCardEl.classList.add('forecast-card');
+        forecastCardEl.classList.add('box', 'forecast-card', 'mb-3');
 
         const dateEl = document.createElement('h4');
         dateEl.textContent = date;

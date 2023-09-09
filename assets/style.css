@@ -1,0 +1,6 @@
+.forecast-card {
+    display: inline-block;
+    width: calc(20% - 1rem);
+    vertical-align: top;
+    margin-right: 1rem;
+}
