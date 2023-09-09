@@ -81,15 +81,18 @@ function displaySearchHistory() {
         historyButton.setAttribute('type', 'button');
         historyButton.setAttribute('aria-controls', 'today forecast');
         historyButton.classList.add('button', 'is-light', 'mb-2', 'hisBUTT');
+        historyButton.setAttribute('title', 'Click to re-search this city');
         historyButton.setAttribute('wya', searchHistoryList[i]);
         historyButton.textContent = searchHistoryList[i];
         searchHistoryEl.append(historyButton);
     }
+    hideEmptyElements();
 };
 
 function displayWeatherData(city, data) {
     displayCurrentWeather(city, data.list[0]);
     displayForecast(data.list);
+    hideEmptyElements();
 };
 
 function displayCurrentWeather(city, weatherData) {
@@ -169,6 +172,19 @@ function displayForecast(dailyForecast) {
         forecastEl.appendChild(forecastCardEl);
     }
 };
+
+function hideEmptyElements() {
+    const elements = [currentWeatherEl, forecastEl, searchHistoryEl];
+
+    elements.forEach(el => {
+        if (!el.innerHTML.trim()) {
+            el.style.display = 'none';
+        } else {
+            el.style.display = 'block';
+        }
+    });
+}
+
 
 loadSearchHistory();
 searchFormEl.addEventListener('submit', onSearchFormSubmit);

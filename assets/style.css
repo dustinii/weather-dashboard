@@ -4,3 +4,12 @@
     vertical-align: top;
     margin-right: 1rem;
 }
+
+.button {
+    transition: all 0.3s ease;
+  }
+
+.button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+  }
