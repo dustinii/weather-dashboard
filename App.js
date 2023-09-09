@@ -16,13 +16,44 @@ const searchHistoryEl = document.querySelector('#history');
 dayjs.extend(dayjs_plugin_utc);
 dayjs.extend(dayjs_plugin_timezone);
 
-function fetchWeatherData(coords){};
+function fetchWeatherData(coords) {
+    const apiUrl = `${WEATHER_API_ROOT_URL}/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lon}&units=imperial&appid=${WEATHER_API_KEY}`;
 
-function fetchCityCoords(city){};
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => displayWeatherData(coords.name, data))
+        .catch(err => console.error(err));
+}
 
-function onSearchFormSubmit(event){};
+function fetchCityCoords(city) { 
+    const apiUrl = `${WEATHER_API_ROOT_URL}/geo/1.0/direct?q=${city}&limit=5&appid=${WEATHER_API_KEY}`;
 
-function onSearchHistoryClick(event){};
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (!data[0]) {
+                alert('Location not found');
+            } else {
+                updateSearchHistory(city);
+                fetchWeatherData(data[0]);
+            }
+        })
+        .catch(error => console.error(error));
+};
+
+function onSearchFormSubmit(event) {
+    event.preventDefault();
+    const cityName = searchInputEl.value.trim();
+    if (!cityName) return;
+
+    fetchCityCoords(cityName);
+    searchInputEl.value = '';
+    
+};
+
+function onSearchHistoryClick(event) {
+    
+};
 
 function loadSearchHistory(){};
 
