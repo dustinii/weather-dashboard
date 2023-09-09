@@ -76,6 +76,14 @@ function updateSearchHistory(city) {
 
 function displaySearchHistory() {
     searchHistoryEl.innerHTML = '';
+
+    // Render text "Recent Searches" if there are any search history items
+    if (searchHistoryList.length > 0) {
+        const historyTitle = document.createElement('h2');
+        historyTitle.textContent = 'Recent Searches:';
+        searchHistoryEl.appendChild(historyTitle);
+    }
+
     for (let i = searchHistoryList.length - 1; i >= 0; i--) {
         const historyButton = document.createElement('button');
         historyButton.setAttribute('type', 'button');
@@ -193,7 +201,7 @@ function hideEmptyElements() {
     });
 }
 
-
+hideEmptyElements();
 loadSearchHistory();
 searchFormEl.addEventListener('submit', onSearchFormSubmit);
 searchHistoryEl.addEventListener('click', onSearchHistoryClick);

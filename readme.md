@@ -2,7 +2,7 @@
 
 A simple, stylish weather application that lets you check the forecast for the upcoming week. Whether it's rain or shine, find out the weather with "Brighter Days"!
 
-![Screenshot of Brighter Days Application]()
+![Screenshot of Brighter Days Application](/BB.png)
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@ A simple, stylish weather application that lets you check the forecast for the u
 
 ## Deployed App
 
-Visit the live application here: [Rain or Shine Deployed App]()
+Visit the live application here: [Brighter Days](https://dustinii.github.io/weather-dashboard/)
 
 
 ## Features
